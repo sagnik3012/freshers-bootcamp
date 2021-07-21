@@ -19,12 +19,9 @@ func (m Matrix) getNumRows() int{
 	return m.NumRows
 }
 
-
-
-func (m *Matrix) set( row , col , value int) {
-	
-  m.Data[row][col] = value
-  return
+func (m *Matrix) set( row , col , v int) {
+	m.Data[row][col] = v
+	return
 }
 
 func (m1 *Matrix) addMatrices(m2 Matrix) Matrix{
@@ -47,6 +44,9 @@ func matrixToJson(m Matrix) error {
 	fmt.Println(string(matrix))
 	return nil
 }
+
+
+
 
 func main(){
 
