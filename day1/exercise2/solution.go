@@ -5,6 +5,7 @@ import (
 )
 
 type node struct{
+
 	data string
 	left *node
 	right *node
@@ -37,13 +38,16 @@ func postOrder( root *node)(){
 
 
 func main(){
+
 	root := buildNode("+")
 	root.left = buildNode( "a")
 	root.right = buildNode( "-")
 	root.right.left = buildNode( "b")
 	root.right.right = buildNode( "c")
+
 	fmt.Print(" Preorder traversal : ")
-	preOrder( root ); fmt.Print("\n Postorder traversal : " )
+	preOrder( root )
+	fmt.Print("\n Postorder traversal : " )
 	postOrder( root)
 
 }
