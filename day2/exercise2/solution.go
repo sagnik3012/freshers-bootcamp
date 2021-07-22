@@ -19,10 +19,10 @@ func getRating(wg *sync.WaitGroup, ratings chan<- float32) {
 func main() {
 
 	var wg sync.WaitGroup
-	totalStudents := 200
-	Ratings := make(chan float32, totalStudents)
+	totStudents := 200
+	Ratings := make(chan float32, totStudents)
 
-	for i := 1; i <= totalStudents; i++ {
+	for i := 1; i <= totStudents; i++ {
 		wg.Add(1)
 		go getRating(&wg, Ratings)
 	}
@@ -34,7 +34,7 @@ func main() {
 	for rate := range Ratings {
 		totalRating += rate
 	}
-	averageRating := totalRating / float32(totalStudents)
+	averageRating := totalRating / float32(totStudents)
 
 	fmt.Println("Average rating of the teacher = ", averageRating)
 }

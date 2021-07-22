@@ -36,14 +36,13 @@ func ParallelFrequency(inputStrings []string) FrequencyMap {
 
 func main(){
 
-	animals := []string{"quick","brown","fox","lazy","dog"}
+	animals := []string{"quick","brown","fox","lazy","dog","happy","cat"}
 
 	frequencies := ParallelFrequency(animals)
 	output , err := json.MarshalIndent(frequencies, "", " ")
 	if err != nil {
 		fmt.Println(" Error in converting to JSON \n ",err)
-	}
-	else{
+	} else{
 		fmt.Println(string(output))
 	}
 }

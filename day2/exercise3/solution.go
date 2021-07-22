@@ -45,13 +45,13 @@ func withdraw(wg * sync.WaitGroup)  {
 func main(){
 
 	balance = 500
-	var waitgroup sync.WaitGroup
+	var waitGroup sync.WaitGroup
 	for transactions := 0 ; transactions <= 10 ; transactions ++{
 
-		waitgroup.Add(2)
-		go deposit(&waitgroup)
-		go withdraw(&waitgroup)
+		waitGroup.Add(2)
+		go deposit(&waitGroup)
+		go withdraw(&waitGroup)
 
 	}
-	waitgroup.Wait()
+	waitGroup.Wait()
 }
