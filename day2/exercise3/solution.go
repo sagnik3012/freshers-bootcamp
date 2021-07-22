@@ -12,7 +12,7 @@ var (
 	balance int
 )
 
-func Deposit( wg *sync.WaitGroup) {
+func deposit( wg *sync.WaitGroup) {
 
 	state.Lock()
 	defer state.Unlock()
@@ -24,7 +24,7 @@ func Deposit( wg *sync.WaitGroup) {
 	wg.Done()
 }
 
-func Withdraw(wg * sync.WaitGroup)  {
+func withdraw(wg * sync.WaitGroup)  {
 
 	state.Lock()
 	defer state.Unlock()
@@ -34,11 +34,11 @@ func Withdraw(wg * sync.WaitGroup)  {
 
 	fmt.Printf("Current balance = %d , Withdrawing %d  \n",balance, amount)
 	if amount > balance {
-		panic("Insufficient funds! Transaction aborted!")
+		fmt.Printf("Insufficient funds! Transaction aborted!\n")
+	} else {
+		balance -= amount
+		fmt.Println("New balance = ",balance)
 	}
-
-	balance -= amount
-	fmt.Println("New balance = ",balance)
 	wg.Done()
 }
 
@@ -49,8 +49,8 @@ func main(){
 	for transactions := 0 ; transactions <= 10 ; transactions ++{
 
 		waitgroup.Add(2)
-		go Deposit(&waitgroup)
-		go Withdraw(&waitgroup)
+		go deposit(&waitgroup)
+		go withdraw(&waitgroup)
 
 	}
 	waitgroup.Wait()

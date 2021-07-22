@@ -7,10 +7,10 @@ import (
 
 type FrequencyMap map[string]int
 
-func getFrequency(str string) FrequencyMap {
+func getFrequency(animal string) FrequencyMap {
 	frequency := FrequencyMap{}
-	for index := 0 ; index < len(str) ; index ++ {
-		frequency[string( str[index] )] += 1
+	for index := 0 ; index < len(animal) ; index ++ {
+		frequency[string( animal[index] )] += 1
 	}
 	return frequency
 }
@@ -35,9 +35,15 @@ func ParallelFrequency(inputStrings []string) FrequencyMap {
 }
 
 func main(){
-	strings := []string{"quick","brown","fox","lazy","dog"}
-	frequencies := ParallelFrequency(strings)
-	output , _ := json.MarshalIndent(frequencies, "", " ")
-	fmt.Println(string(output))
 
+	animals := []string{"quick","brown","fox","lazy","dog"}
+
+	frequencies := ParallelFrequency(animals)
+	output , err := json.MarshalIndent(frequencies, "", " ")
+	if err != nil {
+		fmt.Println(" Error in converting to JSON \n ",err)
+	}
+	else{
+		fmt.Println(string(output))
+	}
 }
