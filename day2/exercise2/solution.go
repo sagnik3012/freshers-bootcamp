@@ -12,8 +12,8 @@ func getRating(wg *sync.WaitGroup, ratings chan<- float32) {
 	defer wg.Done()
 	rand.Seed(time.Now().UnixNano())
 	time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
-	individualRating := rand.Intn(10)
-	ratings <- float32(individualRating)
+	rating := rand.Intn(10)
+	ratings <- float32(rating)
 }
 
 func main() {

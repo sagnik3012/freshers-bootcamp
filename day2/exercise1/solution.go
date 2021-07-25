@@ -5,44 +5,44 @@ import (
 	"fmt"
 )
 
-type FrequencyMap map[string]int
+type CharCount map[string]int
 
-func getFrequency(animal string) FrequencyMap {
-	frequency := FrequencyMap{}
-	for index := 0 ; index < len(animal) ; index ++ {
-		frequency[string( animal[index] )] += 1
+func getFreq(animal string) CharCount {
+	freq := CharCount{}
+	for idx := 0; idx < len(animal); idx++ {
+		freq[string(animal[idx])] += 1
 	}
-	return frequency
+	return freq
 }
 
-func ParallelFrequency(inputStrings []string) FrequencyMap {
-	output := FrequencyMap{}
-	numberofStrings := len(inputStrings)
-	results := make(chan FrequencyMap, numberofStrings)
+func ParaFreq(inputs []string) CharCount {
+	output := CharCount{}
+	nosOfStr := len(inputs)
+	results := make(chan CharCount, nosOfStr)
 
-	for _, currentString := range inputStrings{
+	for _, currStr := range inputs {
 		go func(s string) {
-			results <- getFrequency(s)
-		}(currentString)
+			results <- getFreq(s)
+		}(currStr)
 	}
 
-	for index := 0; index < numberofStrings ; index++ {
-		for character , frequency:= range <-results {
-			output[ character ] += frequency
+	for idx := 0; idx < nosOfStr; idx++ {
+		for char, freq := range <-results {
+			output[char] += freq
 		}
 	}
 	return output
 }
 
-func main(){
+func main() {
 
-	animals := []string{"quick","brown","fox","lazy","dog","happy","cat"}
+	animals := []string{"quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog"}
 
-	frequencies := ParallelFrequency(animals)
-	output , err := json.MarshalIndent(frequencies, "", " ")
+	frequencies := ParaFreq(animals)
+	output, err := json.MarshalIndent(frequencies, "", " ")
 	if err != nil {
-		fmt.Println(" Error in converting to JSON \n ",err)
-	} else{
+		fmt.Println(" Error in converting to JSON \n :", err)
+	} else {
 		fmt.Println(string(output))
 	}
 }
