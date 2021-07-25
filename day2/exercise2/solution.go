@@ -30,11 +30,11 @@ func main() {
 	wg.Wait()
 	close(Ratings)
 
-	totalRating := float32(0)
+	totRating := float32(0)
 	for rate := range Ratings {
-		totalRating += rate
+		totRating += rate
 	}
-	averageRating := totalRating / float32(totStudents)
+	avgRating := totRating / float32(totStudents)
 
-	fmt.Println("Average rating of the teacher = ", averageRating)
+	fmt.Println("Average rating of the teacher = ", avgRating)
 }
