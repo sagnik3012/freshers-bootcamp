@@ -7,8 +7,8 @@ import (
 	"net/http"
 )
 
-//GetEntries ... Get all users
-func GetEntries(c *gin.Context) {
+//GetAllEntries ... Get all users
+func GetAllEntries(c *gin.Context) {
 	var user []Models.Student
 	err := Models.GetAllEntries(&user)
 	if err != nil {

@@ -1,9 +1,9 @@
 package Models
 
 type Student struct {
-	ID        uint   `json:"id"`
+	ID        uint   `json:"id" gorm:"autoIncrement"`
 	Stu_id    uint   `json:"stu_id" `
-	FirstName string `json:"name" `
+	FirstName string `json:"firstname" `
 	LastName  string `json:"surname" `
 	DOB       string `json:"dob"`
 	Address   string `json:"address" `
