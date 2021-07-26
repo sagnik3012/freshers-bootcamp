@@ -72,10 +72,13 @@ func DeleteEntry(c *gin.Context) {
 	}
 }
 
+
+// Added : function to delete all entries
+
 func DeleteAllEntries(c *gin.Context) {
 	err := Models.DeleteAll()
 	if err != nil {
-		c.AbortWithStatus(http.StatusNotFound)
+		c.AbortWithStatus(http.StatusBadRequest)
 	} else {
 		c.JSON(http.StatusOK, "table deleted!")
 	}
