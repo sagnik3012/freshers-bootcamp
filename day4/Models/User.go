@@ -8,7 +8,7 @@ import (
 
 // POST / product
 func CreateProduct(prod *Product) (err error) {
-	if err = Config.DB.Create(prod).Error; err != nil {
+	if err = Config.DB.Model(&Product{}).Create(prod).Error; err != nil {
 		return err
 	}
 	return nil
@@ -23,7 +23,7 @@ func UpdateProduct(prod *Product, id string) (err error) {
 
 // GET / product / :id
 func GetProductByID(prod *Product, id string) (err error) {
-	if err = Config.DB.Where("id = ?", id).First(prod).Error; err != nil {
+	if err = Config.DB.Model(&Product{}).Where("id = ?", id).First(prod).Error; err != nil {
 		return err
 	}
 	return nil
@@ -31,7 +31,7 @@ func GetProductByID(prod *Product, id string) (err error) {
 
 // GET / products
 func GetAllProducts(prods *[]Product) (err error) {
-	if err = Config.DB.Find(prods).Error; err != nil {
+	if err = Config.DB.Model(&Product{}).Find(prods).Error; err != nil {
 		return err
 	}
 	return nil
@@ -39,7 +39,8 @@ func GetAllProducts(prods *[]Product) (err error) {
 
 // POST / order
 func PlaceOrder(ord *Order) (err error) {
-	if err = Config.DB.Create(ord).Error; err != nil {
+
+	if err = Config.DB.Model(&Order{}).Create(ord).Error; err != nil {
 		return err
 	}
 	return nil
@@ -47,15 +48,15 @@ func PlaceOrder(ord *Order) (err error) {
 
 // GET / order / :id
 func GetOrderByID(ord *Order, id string) (err error) {
-	if err = Config.DB.Where("id = ?", id).First(ord).Error; err != nil {
+	if err = Config.DB.Model(&Order{}).Where("id = ?", id).First(ord).Error; err != nil {
 		return err
 	}
 	return nil
 
 }
 func GetAllOrders( ord *[]Order )( err error){
-	if err = Config.DB.Find(ord).Error ; err != nil {
-		return
+	if err = Config.DB.Model(&Order{}).Find(ord).Error ; err != nil {
+		return err
 
 	}
 	return nil

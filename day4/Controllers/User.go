@@ -3,20 +3,42 @@ package Controllers
 import (
 	_ "encoding/json"
 	"fmt"
-
 	"freshers-bootcamp/day4/Models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
+
+// Get all orders issued till current date ( for retailer )
+
+func GetOrderByID(c *gin.Context) {
+	id := c.Params.ByName("id")
+	//prodID := c.Params.ByName("product_id")
+	var ord Models.Order
+	err := Models.GetOrderByID(&ord, id)
+
+	if err != nil {
+		c.AbortWithStatus(http.StatusNotFound)
+	} else {
+		c.JSON(http.StatusOK, gin.H{"order_id":ord.ID , "product_id" : ord.ProductId,
+			"quantity":ord.Quantity, "status":"order placed"})
+	}
+}
+
 func GetAllOrders( c *gin.Context){
 	var order []Models.Order
 	err := Models.GetAllOrders(&order)
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
+		var prod *Models.Product
+		for i := range order{
+			order[i].Customer.ID = order[i].CustomerId
+		}
 		c.JSON(http.StatusOK, order)
 	}
 }
+
+// get all products in the retail shop ( for retailer)
 
 func GetAllProducts(c *gin.Context) {
 	var prod []Models.Product
@@ -29,6 +51,8 @@ func GetAllProducts(c *gin.Context) {
 	}
 }
 
+// add a new product in the retail shop ( for retailer)
+
 func CreateProduct(c *gin.Context) {
 	var product Models.Product
 	c.BindJSON(&product)
@@ -38,13 +62,15 @@ func CreateProduct(c *gin.Context) {
 		c.AbortWithStatus(http.StatusConflict)
 	} else {
 
-		c.JSON(http.StatusOK,gin.H{"id":product.Id , "product_name": product.ProductName,
+		c.JSON(http.StatusOK,gin.H{"id":product.ID , "product_name": product.ProductName,
 			"price":product.Price,"quantity":product.Quantity,
 			"response":"product successfully added!"})
-
 	}
 }
-func UpdateProduct(c *gin.Context) {
+
+// edit details of an existing product
+
+func PatchProduct(c *gin.Context) {
 	var prod Models.Product
 	id := c.Params.ByName("id")
 
@@ -61,6 +87,8 @@ func UpdateProduct(c *gin.Context) {
 	}
 }
 
+// fetch product by its ID ( for customer)
+
 func GetProductByID(c *gin.Context) {
 	id := c.Params.ByName("id")
 	var prod Models.Product
@@ -72,24 +100,11 @@ func GetProductByID(c *gin.Context) {
 	}
 }
 
-func PlaceOrder(c *gin.Context) {
+func PlaceOrder (c *gin.Context) {
 	var order Models.Order
 	c.BindJSON(&order)
-	err := Models.PlaceOrder(&order)
-	if err != nil {
-		fmt.Println(err.Error())
-		c.AbortWithStatus(http.StatusNotFound)
-	} else{
-
-		c.JSON(http.StatusOK, order)
-	}
-}
-func GetOrderByID(c *gin.Context) {
-	id := c.Params.ByName("id")
-	var order Models.Order
-	err := Models.GetOrderByID(&order, id)
-	if err != nil {
-		c.AbortWithStatus(http.StatusNotFound)
+	if err := Models.PlaceOrder(&order); err != nil {
+		c.AbortWithStatus(http.StatusBadRequest)
 	} else {
 		c.JSON(http.StatusOK, order)
 	}
@@ -105,6 +120,3 @@ func DeleteAllProducts(c *gin.Context) {
 
 }
 
-/*
-
- */
