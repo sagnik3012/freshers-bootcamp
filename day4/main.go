@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"freshers-bootcamp/day4/Config"
 	"freshers-bootcamp/day4/Models"
+	"freshers-bootcamp/day4/Models/Customer"
+
 	"freshers-bootcamp/day4/Routes"
 	"github.com/jinzhu/gorm"
 )
@@ -16,7 +18,7 @@ func main() {
 		fmt.Println("Status:", err)
 	}
 	defer Config.DB.Close()
-	Config.DB.AutoMigrate(&Models.Product{}, &Models.Order{},&Models.Customer{})
+	Config.DB.AutoMigrate(&Models.Product{}, &Models.Order{}, &Models.Customer{})
 	r := Routes.SetupRouter()
 	r.Run()
 }
