@@ -1,5 +1,18 @@
 package Models
 
+// declaring all Tables here
+
+type Customer struct {
+	ID       int64  `json:"customer_id"`
+	Name     string `json:"name"`
+	Activity bool   `json:"status"`
+
+}
+
+func (b *Customer) TableName() string {
+	return "Customers"
+}
+
 
 
 type Order struct {
@@ -14,17 +27,6 @@ type Order struct {
 
 func (b *Order) TableName() string {
 	return "Orders"
-}
-package Models
-type Customer struct {
-	ID       int64  `json:"customer_id"`
-	Name     string `json:"name"`
-	Activity bool   `json:"status"`
-	// add other fields
-}
-
-func (b *Customer) TableName() string {
-	return "Customers"
 }
 
 type Product struct {

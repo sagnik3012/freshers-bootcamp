@@ -4,12 +4,11 @@ import (
 	"errors"
 	"fmt"
 	"freshers-bootcamp/day4/Config"
-	"freshers-bootcamp/day4/Models/Product"
 )
 
 func PlaceOrder(ord *Order) (err error) {
-	var product Models.Product
-	Config.DB.Model(&Models.Product{}).Where("id = ?", ord.ProductId).First(&product)
+	var product Product
+	Config.DB.Model(&Product{}).Where("id = ?", ord.ProductId).First(&product)
 	if ord.Quantity > product.Quantity {
 		fmt.Println("cancelled!!!!")
 		ord.Status = "order cancelled!!"
@@ -18,7 +17,7 @@ func PlaceOrder(ord *Order) (err error) {
 	} else {
 		fmt.Println("placed!!!!!")
 		ord.Status = "order placed!!"
-		Config.DB.Model(&Models.Product{}).Where("id = ?", ord.ProductId).Update("quantity", product.Quantity-ord.Quantity)
+		Config.DB.Model(&Product{}).Where("id = ?", ord.ProductId).Update("quantity", product.Quantity-ord.Quantity)
 		Config.DB.Model(&Order{}).Create(ord)
 		return nil
 	}
@@ -42,10 +41,3 @@ func GetAllOrders(ord *[]Order) (err error) {
 
 
 // change the post order function
-
-func DeleteAllOrders( ) ( err error){
-	if err = Config.DB.Where("1 = ?",1).Delete(&Order{}).Error ; err != nil {
-		return err
-	}
-	return nil
-}

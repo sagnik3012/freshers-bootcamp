@@ -2,11 +2,11 @@ package Controllers
 
 import (
 	"fmt"
-	"freshers-bootcamp/day4/Models/Order"
+	"freshers-bootcamp/day4/Models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
-
+// get orders by id
 func GetOrderByID(c *gin.Context) {
 	id := c.Params.ByName("id")
 	//prodID := c.Params.ByName("product_id")
@@ -58,14 +58,3 @@ func GetAllOrders(c *gin.Context) {
 	}
 }
 
-
-
-func DeleteAllOrders(c *gin.Context) {
-	err := Models.DeleteAllOrders()
-	if err != nil {
-		c.AbortWithStatus(http.StatusNotFound)
-	} else {
-		c.JSON(http.StatusOK, "all product details deleted!")
-	}
-
-}

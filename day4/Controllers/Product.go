@@ -3,8 +3,8 @@ package Controllers
 import (
 	_ "encoding/json"
 	"fmt"
-	//_"freshers-bootcamp/day4/Models"
-	"freshers-bootcamp/day4/Models/Product"
+	"freshers-bootcamp/day4/Models"
+
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -39,7 +39,7 @@ func CreateProduct(c *gin.Context) {
 	}
 }
 
-// edit details of an existing product
+// edit details of a product
 
 func PatchProduct(c *gin.Context) {
 	var prod Models.Product

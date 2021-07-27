@@ -2,12 +2,12 @@ package Controllers
 
 import (
 	"fmt"
-	"freshers-bootcamp/day4/Models/Customer"
+	"freshers-bootcamp/day4/Models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
-//CreateUser ... Create User
+//CreateCustomer
 func AddCustomer( c*gin.Context){
 	var customer Models.Customer
 	c.BindJSON(&customer)

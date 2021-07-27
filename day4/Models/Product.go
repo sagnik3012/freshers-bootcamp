@@ -5,6 +5,7 @@ import (
 	"freshers-bootcamp/day4/Config"
 )
 
+// create a new product
 func CreateProduct(prod *Product) (err error) {
 	if err = Config.DB.Model(&Product{}).Create(prod).Error; err != nil {
 		return err

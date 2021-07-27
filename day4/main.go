@@ -1,13 +1,13 @@
 package main
 
-import (
+import(
 	"fmt"
+
+	"github.com/jinzhu/gorm"
+
 	"freshers-bootcamp/day4/Config"
 	"freshers-bootcamp/day4/Models"
-	"freshers-bootcamp/day4/Models/Customer"
-
 	"freshers-bootcamp/day4/Routes"
-	"github.com/jinzhu/gorm"
 )
 
 var err error
