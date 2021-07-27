@@ -1,6 +1,6 @@
 package main
 
-import(
+import (
 	"fmt"
 
 	"github.com/jinzhu/gorm"
@@ -19,6 +19,7 @@ func main() {
 	}
 	defer Config.DB.Close()
 	Config.DB.AutoMigrate(&Models.Product{}, &Models.Order{}, &Models.Customer{})
+
 	r := Routes.SetupRouter()
-	r.Run()
+	r.Run() // default port : 8080
 }

@@ -69,4 +69,3 @@ func GetProductByID(c *gin.Context) {
 		c.JSON(http.StatusOK, prod)
 	}
 }
-

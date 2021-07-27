@@ -8,7 +8,7 @@ import (
 )
 
 //CreateCustomer
-func AddCustomer( c*gin.Context){
+func AddCustomer(c *gin.Context) {
 	var customer Models.Customer
 	c.BindJSON(&customer)
 	err := Models.AddCustomer(&customer)
@@ -16,10 +16,9 @@ func AddCustomer( c*gin.Context){
 		fmt.Println("error : ", err)
 		c.AbortWithStatus(http.StatusBadRequest)
 	} else {
-		c.JSON(http.StatusOK,gin.H{"customer_id":customer.ID, "customer_name":customer.Name})
+		c.JSON(http.StatusOK, gin.H{"customer_id": customer.ID, "customer_name": customer.Name})
 	}
 }
-
 
 func GetCustomerByID(c *gin.Context) {
 	id := c.Params.ByName("id")
@@ -28,7 +27,7 @@ func GetCustomerByID(c *gin.Context) {
 	if err != nil {
 		c.AbortWithStatus(http.StatusNotFound)
 	} else {
-		c.JSON(http.StatusOK, gin.H{"customer_id" : customer.ID,
-			"customer_name" : customer.Name})
+		c.JSON(http.StatusOK, gin.H{"customer_id": customer.ID,
+			"customer_name": customer.Name})
 	}
 }

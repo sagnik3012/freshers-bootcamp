@@ -1,8 +1,10 @@
 package Models
-import(
+
+import (
 	"freshers-bootcamp/day4/Config"
-	_"github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 )
+
 func AddCustomer(customer *Customer) (err error) {
 	if err = Config.DB.Model(&Customer{}).Create(customer).Error; err != nil {
 		return err

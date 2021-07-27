@@ -6,14 +6,11 @@ type Customer struct {
 	ID       int64  `json:"customer_id"`
 	Name     string `json:"name"`
 	Activity bool   `json:"status"`
-
 }
 
 func (b *Customer) TableName() string {
 	return "Customers"
 }
-
-
 
 type Order struct {
 	ID         int64    `json:"order_id"`
@@ -39,7 +36,3 @@ type Product struct {
 func (b *Product) TableName() string {
 	return "Products"
 }
-
-
-
-

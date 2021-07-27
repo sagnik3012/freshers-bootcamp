@@ -23,5 +23,6 @@ func SetupRouter() *gin.Engine {
 		grp1.GET("customer/:id", Controllers.GetCustomerByID)
 
 	}
+
 	return r
 }
