@@ -1,6 +1,7 @@
 <?php
 
-$input = ["snake_case" , "camel_case" , "snake_snake_camel_camel"];
+$snakeCase = ["snake_case" , "camel_case"];
+$camelCase = [];
 
 function snakeToCamel( $snake ){
 
@@ -15,12 +16,14 @@ function snakeToCamel( $snake ){
     return $camel;
 
 }
-$output = [];
 
-foreach ( $input as $name){
+foreach ( $snakeCase as $name){
     $camel = snakeToCamel($name);
-    array_push($output, $camel);
+    array_push($camelCase, $camel);
 }
 
-print_r($output);
 
+echo "Input : ";
+print_r($snakeCase);
+echo "Output : \n";
+print_r($camelCase);
