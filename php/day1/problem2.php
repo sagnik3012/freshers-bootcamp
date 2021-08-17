@@ -12,6 +12,7 @@ function maskPhoneNumber( $phoneNumber){
         . str_repeat("*",6).substr($number,-2);
 
 }
+
 echo maskPhoneNumber($phoneNumber);
 
 

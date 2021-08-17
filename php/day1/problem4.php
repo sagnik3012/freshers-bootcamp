@@ -63,10 +63,12 @@ $cricketers = new Cricketers($CricketersJSON);
 // part 1 solution
 echo "Solution to part 1 :\n";
 $cricketers->getNamesAgesAndCities();
+
 // part 2 solution
 echo "Solution to part 2 :\n";
 echo "Unique Cricketer Names:\n";
 print_r($cricketers->getUniqueNames());
+
 // part 3 solution
 echo "Solution to part 3 :\n";
 print "Cricketers with maximum age :\n";

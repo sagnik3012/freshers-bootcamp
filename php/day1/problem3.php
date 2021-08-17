@@ -22,7 +22,6 @@ foreach ( $snakeCase as $name){
     array_push($camelCase, $camel);
 }
 
-
 echo "Input : ";
 print_r($snakeCase);
 echo "Output : \n";

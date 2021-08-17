@@ -14,7 +14,6 @@ foreach ($input as $key => $value) {
 
 }
 
-
 echo "Output \n";
 print_r($output);
 
